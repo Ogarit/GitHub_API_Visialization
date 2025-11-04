@@ -14,21 +14,17 @@ except ConnectionError:
 else:
     print(f"Código de status: {r.status_code}")
 
-    # Converte o objeto de resposta em um dicionário
+    # Processa os resultados gerais
     response_dict = r.json()
-    print(f"Total de repositórios: {response_dict['total_count']}")
     print(f"Resultados completos: {not response_dict['incomplete_results']}")
 
-    # Explora informações sobre os repositórios
+    # Processa as informações do repositório
     repo_dicts = response_dict['items']
-    print(f"Repositórios retornados: {len(repo_dicts)}")
-
-    print("\nSeleciona informações sobre cada repositório:")
+    repo_names, stars = [], []
     for repo_dict in repo_dicts:
-        print(f"Nome: {repo_dict['name']}")
-        print(f"Proprietário(a): {repo_dict['owner']['login']}")
-        print(f"Estrelas: {repo_dict['stargazers_count']}")
-        print(f"Repositório: {repo_dict['html_url']}")
-        print(f"Criado: {repo_dict['created_at']}")
-        print(f"Atualizado: {repo_dict['updated_at']}")
-        print(f"Descrição: {repo_dict['description']}")
+        repo_names.append(repo_dict['name'])
+        stars.append(repo_dict['stargazers_count'])
+
+    # Cria a visualização
+    fig = px.bar(x=repo_names, y=stars)
+    fig.show()
