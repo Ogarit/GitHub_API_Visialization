@@ -1,3 +1,4 @@
+import plotly.express as px
 from requests.exceptions import ConnectionError
 import requests
 
@@ -22,14 +23,12 @@ else:
     repo_dicts = response_dict['items']
     print(f"Repositórios retornados: {len(repo_dicts)}")
 
-    # Examina o primeiro repositório
-    repo_dict = repo_dicts[0]
-
-    print("\nInformações selecionadas do primeiro repositório:")
-    print(f"Nome: {repo_dict['name']}")
-    print(f"Proprietário(a): {repo_dict['owner']['login']}")
-    print(f"Estrelas: {repo_dict['stargazers_count']}")
-    print(f"Repositório: {repo_dict['html_url']}")
-    print(f"Criado: {repo_dict['created_at']}")
-    print(f"Atualizado: {repo_dict['updated_at']}")
-    print(f"Descrição: {repo_dict['description']}")
+    print("\nSeleciona informações sobre cada repositório:")
+    for repo_dict in repo_dicts:
+        print(f"Nome: {repo_dict['name']}")
+        print(f"Proprietário(a): {repo_dict['owner']['login']}")
+        print(f"Estrelas: {repo_dict['stargazers_count']}")
+        print(f"Repositório: {repo_dict['html_url']}")
+        print(f"Criado: {repo_dict['created_at']}")
+        print(f"Atualizado: {repo_dict['updated_at']}")
+        print(f"Descrição: {repo_dict['description']}")
