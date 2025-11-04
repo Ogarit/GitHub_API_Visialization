@@ -20,9 +20,12 @@ else:
 
     # Processa as informações do repositório
     repo_dicts = response_dict['items']
-    repo_names, stars, hover_texts = [], [], []
+    repo_links, stars, hover_texts = [], [], []
     for repo_dict in repo_dicts:
-        repo_names.append(repo_dict['name'])
+        # Transforma os nomes dos repositórios em links ativos
+        repo_name = repo_dict['name']
+        repo_url = repo_dict['html_url']
+        repo_links.append(f"<a href='{repo_url}'>{repo_name}<a/>")
         stars.append(repo_dict['stargazers_count'])
 
         # Cria textos flutuantes
@@ -34,7 +37,7 @@ else:
     # Cria a visualização
     title = "Projetos Python mais curtidos no GitHub"
     labels = {'x': 'Repositório', 'y': 'Estrelas'}
-    fig = px.bar(x=repo_names, y=stars, title=title, labels=labels,
+    fig = px.bar(x=repo_links, y=stars, title=title, labels=labels,
                  hover_name=hover_texts)
 
     fig.update_layout(title_font_size=28, xaxis_title_font_size=20,
