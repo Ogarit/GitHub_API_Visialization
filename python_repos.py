@@ -24,6 +24,12 @@ else:
 
     # Examina o primeiro repositório
     repo_dict = repo_dicts[0]
-    print(f"\nChaves: {len(repo_dict)}")
-    for key in sorted(repo_dict.keys()):
-        print(key)
+
+    print("\nInformações selecionadas do primeiro repositório:")
+    print(f"Nome: {repo_dict['name']}")
+    print(f"Proprietário(a): {repo_dict['owner']['login']}")
+    print(f"Estrelas: {repo_dict['stargazers_count']}")
+    print(f"Repositório: {repo_dict['html_url']}")
+    print(f"Criado: {repo_dict['created_at']}")
+    print(f"Atualizado: {repo_dict['updated_at']}")
+    print(f"Descrição: {repo_dict['description']}")
